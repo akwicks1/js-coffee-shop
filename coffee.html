@@ -60,14 +60,23 @@
 
     myImage.setAttribute('src', 'static/coffee_beans.jpg');
 
+     var prices = {
+        "brew": 2.05,
+        "espresso": 3.25,
+        "latte": 4.15,
+        "hot-chocolate": 2.50
+    };
+
 
     function makeCoffee(drinkType) {
         myImage.setAttribute('src', 'static/coffee_machine.jpg');
         setTimeout(makeCoffeeMug, 1500);
         setTimeout(makeCoffeeBeans, 4000);
         drinksOrdered.push(drinkType)
+        total = revenue(drinksOrdered, prices)
 
         console.log(drinksOrdered)
+        myRevenueMessage.innerHTML = total;
     }
 
 
@@ -93,17 +102,12 @@
     hotChocolate.addEventListener('click',
                          function () { return makeCoffee('hot-chocolate'); });
 
-    var prices = {
-        "brew": 2.05,
-        "espresso": 3.25,
-        "latte": 4.15,
-        "hot chocolate": 2.50
-    };
+   
 
     function revenue(drinksOrdered, prices) {
         total = 0;
         drinksOrdered.forEach(function (drink) {
-            total = prices[drink] + total
+            total = total + prices[drink];
         });
         return total;
     }
